@@ -94,4 +94,6 @@ int main()
 
 	sort(empty_location.begin(), empty_location.end());
 	dfs(0);
+	
+	return 0;
 }
