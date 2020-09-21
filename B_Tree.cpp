@@ -188,16 +188,13 @@ void b_tree_node::remove_node(int v) {
 		if (leaf)
 			return; // 노드가 리프일 땐 단순 종료
 
-		// 만약 이 노드를 루트로 하는 서브 트리에 키 값이 존재한다면 해당 인덱스는 최대 n일 것이다
-		bool exist = ((idx == n) ? true : false); // 따라서 인덱스가 n이면 키 값이 child에 존재할 것이다.
-
 		if (child[idx]->n < m) // idx번째 자식이 규칙 2를 만족하지 않는다면 
 			fill(idx); // idx번째 자식을 채운다
 
-		if (exist && idx > n) // 키 값이 서브 트리에 존재하고 
-			child[idx - 1]->remove_node(v); // 
-		else
-			child[idx]->remove_node(v);	
+		if (idx > n) // idx가 n + 1일 경우
+			child[idx - 1]->remove_node(v); // n번째 child 차원에서 삭제 연산
+		else // idx가 n 이하일 경우
+			child[idx]->remove_node(v);	// idx번째 child 차원에서 삭제 연산
 	}
 	return;
 }
@@ -298,10 +295,10 @@ void b_tree_node::borrow_from_prev(int idx) {
 }
 // idx번째 자식이 idx + 1번째 자식으로부터 키를 가져온다. 위 함수와 동작 방식은 동일
 void b_tree_node::borrow_from_succ(int idx) {
-	b_tree_node* c = child[idx]; // 키를 얻을 idx번째 자식
-	b_tree_node* s = child[idx + 1]; // 키를 잃을 idx + 1번째 자식
+	b_tree_node* c = child[idx]; 
+	b_tree_node* s = child[idx + 1]; 
 
-	c->keys[c->n] = keys[idx]; // 
+	c->keys[c->n] = keys[idx]; 
 
 	if (!c->leaf)
 		c->child[c->n + 1] = s->child[0];
