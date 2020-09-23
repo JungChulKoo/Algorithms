@@ -51,7 +51,6 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
 	int number_of_area = 0, max_size_of_one_area = 0;
 	pair<int, int> p;
 	vector<int> answer(2), cnt(10201);
-	vector<long long> col;
 	vector<pair<int, int>> sp;
 	queue<pair<int, int>> q;
 
