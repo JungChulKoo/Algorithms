@@ -22,15 +22,17 @@ int solution(int m, int n, vector<vector<int>> puddles) {
 			if (way[i][j] != IN_WATER) {
 				if (way[i][j - 1] != IN_WATER) {
 					way[i][j] += way[i][j - 1];
-                    way[i][j] %= 1000000007;
-                }
+                    			way[i][j] %= 1000000007;
+				}
+           
 				if (way[i - 1][j] != IN_WATER) {
-                    way[i][j] += way[i - 1][j];
-                    way[i][j] %= 1000000007;
-                }
-            }
+                    			way[i][j] += way[i - 1][j];
+                    			way[i][j] %= 1000000007;
+				}
+			}
 		}
 	}
+	
 	answer = way[m][n];
 	return answer;
 }
